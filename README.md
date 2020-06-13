@@ -10,7 +10,7 @@ All you need to do, then is double click on the script and enter the name of the
 
 ## Installation
 
-What the video at:
+Watch the video [here](https://youtu.be/EqkyGBz9av4?list=PLnE1d1TMuFwPqZq0caXSzHM4u2UdPmhW4) and read along below. 
 
 Here are the written instructions, including what text you must copy then paste into your terminal.
 
