@@ -1,6 +1,6 @@
 #!/bin/bash
 cd -- "$(dirname "$BASH_SOURCE")"
-pwd
+echo "Current directory is:" `pwd`
 read -p 'Enter new project name: ' project
 
 if [ -e $project ]
