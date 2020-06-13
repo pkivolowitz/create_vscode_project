@@ -18,7 +18,7 @@ Here are the written instructions, including what text you must copy then paste 
 2. Change directory to where your projects will be stored.
 3. Copy this line:
 ```text
-wget --no-check-certificate --content-disposition https://github.com/pkivolowitz/create_vscode_project_mac/blob/master/create_project.command
+wget --no-check-certificate --content-disposition https://raw.githubusercontent.com/pkivolowitz/create_vscode_project_mac/master/create_project.command
 ```
 4. Paste the above line and hit return.
 5. You should see something like this:
