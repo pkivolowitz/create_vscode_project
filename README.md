@@ -14,7 +14,7 @@ What the video at:
 
 Here are the written instructions, including what text you must copy then paste into your terminal.
 
-1. Open TERMINAL
+1. Open TERMINAL - if you have not already done so, create the directory where all your CSC 1810 or CSC 1820 projects will go.
 2. Change directory to where your projects will be stored.
 3. Copy this line:
 ```text
