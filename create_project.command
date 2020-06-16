@@ -83,7 +83,7 @@ cat > tasks.json <<EOF
                 "./a.out"
             ],
             "options": {
-                "cwd": "${workspaceFolder}"
+                "cwd": ""
             },
             "problemMatcher": [
                 "$gcc"
