@@ -10,15 +10,15 @@ All you need to do, then is double click on the script and enter the name of the
 
 ## Installation
 
-What the video at:
+Watch the video [here](https://youtu.be/EqkyGBz9av4?list=PLnE1d1TMuFwPqZq0caXSzHM4u2UdPmhW4) and read along below. 
 
 Here are the written instructions, including what text you must copy then paste into your terminal.
 
-1. Open TERMINAL
+1. Open TERMINAL - if you have not already done so, create the directory where all your CSC 1810 or CSC 1820 projects will go.
 2. Change directory to where your projects will be stored.
 3. Copy this line:
 ```text
-wget --no-check-certificate --content-disposition https://github.com/pkivolowitz/create_vscode_project_mac/blob/master/create_project.command
+wget --no-check-certificate --content-disposition https://raw.githubusercontent.com/pkivolowitz/create_vscode_project_mac/master/create_project.command
 ```
 4. Paste the above line and hit return.
 5. You should see something like this:
