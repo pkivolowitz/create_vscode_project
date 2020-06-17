@@ -110,7 +110,7 @@ cat > launch.json <<EOF
 			"name": "g++ - Build and debug active file",
 			"type": "cppdbg",
 			"request": "launch",
-			"program": "\$fileDirname}/a.out",
+			"program": "\${fileDirname}/a.out",
 			"args": [
 			],
 			"cwd": "\${workspaceFolder}"
