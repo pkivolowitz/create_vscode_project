@@ -1,6 +1,6 @@
 #!/bin/bash
 cd -- "$(dirname "$BASH_SOURCE")"
-pwd
+echo "Current directory is:" `pwd`
 read -p 'Enter new project name: ' project
 
 if [ -e $project ]
@@ -83,7 +83,7 @@ cat > tasks.json <<EOF
                 "./a.out"
             ],
             "options": {
-                "cwd": "${workspaceFolder}"
+                "cwd": ""
             },
             "problemMatcher": [
                 "$gcc"
@@ -110,7 +110,7 @@ cat > launch.json <<EOF
 			"name": "g++ - Build and debug active file",
 			"type": "cppdbg",
 			"request": "launch",
-			"program": "${fileDirname}/a.out",
+			"program": "${workspaceFolder}/a.out",
 			"args": [
 			],
 			"cwd": ".",
