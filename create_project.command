@@ -1,4 +1,16 @@
 #!/bin/bash
+sys="$(uname -s)"
+case "${sys}" in
+	Linux*)     machine=Linux;;
+	Darwin*)    machine=Mac;;
+	*)          machine=UNKNOWN
+esac
+if [ $machine == "UNKNOWN" ]
+then
+	echo "This script is written for Macintosh or Linux. This machine appears to be neither:" $sys
+	exit
+fi
+
 cd -- "$(dirname "$BASH_SOURCE")"
 echo "Current directory is:" `pwd`
 read -p 'Enter new project name: ' project
@@ -61,7 +73,90 @@ fi
 
 cd .vscode
 
-cat > tasks.json <<EOF
+WinCreateLaunch() {
+	cat > launch.json <<EOF
+{
+	// Windows version
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "g++ - Build and debug active file",
+            "type": "cppdbg",
+            "request": "launch",
+            "program": "\${fileDirname}/a.out",
+            "args": [],
+            "stopAtEntry": false,
+            "cwd": "\${workspaceFolder}",
+            "environment": [],
+            "externalConsole": false,
+            "MIMode": "gdb",
+            "setupCommands": [
+                {
+                    "description": "Enable pretty-printing for gdb",
+                    "text": "-enable-pretty-printing",
+                    "ignoreFailures": true
+                }
+            ],
+            "preLaunchTask": "C/C++: g++ build active file",
+            "miDebuggerPath": "/usr/bin/gdb"
+        }
+    ]
+}
+EOF
+	echo "launch.json created."
+}
+
+MacCreateLaunch() {
+	cat > launch.json <<EOF
+{
+	// Mac version.
+	"version": "0.2.0",
+	"configurations": [
+		{
+			"name": "g++ - Build and debug active file",
+			"type": "cppdbg",
+			"request": "launch",
+			"program": "\${fileDirname}/a.out",
+			"args": [
+			],
+			"cwd": "\${workspaceFolder}",
+			"externalConsole": true,
+			"MIMode": "lldb",
+			"preLaunchTask": "C/C++: g++ build active file",
+			"setupCommands": [ { "text": "set startup-with-shell enable"}]
+		}
+	]
+}
+EOF
+	echo "launch.json created."
+}
+
+WinCreateTasks() {
+	cat > tasks.json <<EOF
+{
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "C/C++: g++ build active file",
+            "type": "shell",
+            "command": "/usr/bin/g++",
+            "args": [
+                "-Wall",
+                "-std=c++11",
+                "-g",
+                "\${workspaceFolder}/*.cpp",
+                "-o",
+                "\${workspaceFolder}/a.out"
+            ]
+        }
+    ],
+}
+EOF
+	echo "tasks.json created."
+}
+
+MacCreateTasks() {
+	cat > tasks.json <<EOF
 {
     "tasks": [
 		{
@@ -83,7 +178,7 @@ cat > tasks.json <<EOF
                 "./a.out"
             ],
             "options": {
-                "cwd": ""
+                "cwd": "\${workspaceFolder}"
             },
             "problemMatcher": [
                 "$gcc"
@@ -97,32 +192,17 @@ cat > tasks.json <<EOF
     "version": "2.0.0"
 }
 EOF
-echo "tasks.json created."
-
-cat > launch.json <<EOF
-{
-	// Use IntelliSense to learn about possible attributes.
-	// Hover to view descriptions of existing attributes.
-	// For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
-	"version": "0.2.0",
-	"configurations": [
-		{
-			"name": "g++ - Build and debug active file",
-			"type": "cppdbg",
-			"request": "launch",
-			"program": "\${fileDirname}/a.out",
-			"args": [
-			],
-			"cwd": "\${workspaceFolder}"
-			"externalConsole": true,
-			"MIMode": "lldb",
-			"preLaunchTask": "C/C++: g++ build active file",
-			"setupCommands": [ { "text": "set startup-with-shell enable"}]
-		}
-	]
+	echo "tasks.json created."
 }
-EOF
-echo "launch.json created."
+
+if [ $machine == "Mac" ]
+then
+	MacCreateTasks
+	MacCreateLaunch
+else
+	WinCreateTasks
+	WinCreateLaunch
+fi
 
 cat > settings.json <<EOF
 {
